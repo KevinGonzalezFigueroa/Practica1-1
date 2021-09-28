@@ -1,8 +1,6 @@
 package com.company;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Arrays;
 
 public class Main {
@@ -19,18 +17,51 @@ public class Main {
 
             String[] campos = linea.split(separador);
 
+            String[] listado = new String[79];
+
             linea = br.readLine();
+
+            int contador = 0;
 
             while (linea != null) {
 
                 campos = linea.split(separador);
 
-                System.out.println(Arrays.toString(campos));
+                listado[contador] = Arrays.toString(campos);
+                contador++;
 
                 linea = br.readLine();
 
             }
+
+            String[] nombresSeleccionados = new String[10];
+            for (int i = 0; i <= 9; i++) {
+                int valorEntero = (int) Math.floor(Math.random()*(listado.length-0)+1);
+                nombresSeleccionados[i] = listado[valorEntero];
+            }
+
+            String[] notasYNombres = new String[10];
+
+            for (int i = 0; i <= 9 ; i++) {
+                double valorAleatorio1 = Math.random()*(10-0)+0;
+                double valorAleatorio2 = Math.random()*(10-0)+0;
+                double valorAleatorio3 = Math.random()*(10-0)+0;
+                double valorAleatorio4 = Math.random()*(10-0)+0;
+                notasYNombres[i] = nombresSeleccionados[i] + ", " + Math.floor(valorAleatorio1 * 100)/100 + ", " + Math.floor(valorAleatorio2 * 100)/100 + ", " + Math.floor(valorAleatorio3 * 100)/100 + ", " + Math.floor(valorAleatorio4 * 100)/100;
+
+            }
+
+            BufferedWriter bw = new BufferedWriter(new FileWriter(rutaDelArchivo+"prueba.txt"));
+            bw.write("Nombre, Nota1, Nota2, Nota3, Nota4");
+            bw.newLine();
+
+            for (int i = 0; i <= 9; i++){
+                bw.write(notasYNombres[i]);
+                bw.newLine();
+            }
+            bw.close();
         }
+
         catch (IOException e) {
             e.printStackTrace();
         }
