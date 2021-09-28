@@ -37,7 +37,7 @@ public class Main {
             String[] nombresSeleccionados = new String[10];
             for (int i = 0; i <= 9; i++) {
                 int valorEntero = (int) Math.floor(Math.random()*(listado.length-0)+1);
-                nombresSeleccionados[i] = listado[valorEntero];
+                nombresSeleccionados[i] = listado[valorEntero].substring(1, listado[valorEntero].length()-1);
             }
 
             String[] notasYNombres = new String[10];
@@ -47,12 +47,14 @@ public class Main {
                 double valorAleatorio2 = Math.random()*(10-0)+0;
                 double valorAleatorio3 = Math.random()*(10-0)+0;
                 double valorAleatorio4 = Math.random()*(10-0)+0;
-                notasYNombres[i] = nombresSeleccionados[i] + ", " + Math.floor(valorAleatorio1 * 100)/100 + ", " + Math.floor(valorAleatorio2 * 100)/100 + ", " + Math.floor(valorAleatorio3 * 100)/100 + ", " + Math.floor(valorAleatorio4 * 100)/100;
+                notasYNombres[i] = nombresSeleccionados[i] + ", " + Math.floor(valorAleatorio1 * 100)/100 + ", " + Math.floor(valorAleatorio2 * 100)/100 + ", " +
+                        Math.floor(valorAleatorio3 * 100)/100 + ", " + Math.floor(valorAleatorio4 * 100)/100 + ", " + Math.floor(((Math.floor(valorAleatorio1 * 100)/100 +
+                        Math.floor(valorAleatorio2 * 100)/100 + Math.floor(valorAleatorio3 * 100)/100 + Math.floor(valorAleatorio4 * 100)/100)/4)*100)/100;
 
             }
 
             BufferedWriter bw = new BufferedWriter(new FileWriter(rutaDelArchivo+"prueba.txt"));
-            bw.write("Nombre, Nota1, Nota2, Nota3, Nota4");
+            bw.write("Nombre, Nota1, Nota2, Nota3, Nota4, notaMedia");
             bw.newLine();
 
             for (int i = 0; i <= 9; i++){
